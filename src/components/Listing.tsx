@@ -1,4 +1,5 @@
 import type { ListingType } from "../context/JobListingContext";
+import { useJobListing } from "../context/JobListingContext";
 
 export default function Listing({ listing }: { listing: ListingType }) {
     const { 
@@ -13,6 +14,7 @@ export default function Listing({ listing }: { listing: ListingType }) {
         languages,
         tools
     } = listing;
+    const { toggleFilter } = useJobListing();
 
     return (
         <div className={`listing ${featured ? "listing-featured" : ""}`}>
@@ -39,7 +41,11 @@ export default function Listing({ listing }: { listing: ListingType }) {
             </div>
             <div className="listing-tags">
                 {[...languages, ...tools].map(tag => 
-                    <div key={tag} className="tag">
+                    <div 
+                        key={tag} 
+                        className="tag"
+                        onClick={() => toggleFilter(tag)}
+                    >
                         { tag }
                     </div>    
                 )}

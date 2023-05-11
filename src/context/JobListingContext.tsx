@@ -5,6 +5,8 @@ export type ListingType = typeof data[0];
 
 type JobListingContextType = {
     renderedListings: ListingType[],
+    filters: string[],
+    toggleFilter: (filter: string) => void,
 }
 
 const JobListingContext = createContext<JobListingContextType>(null!);
@@ -16,9 +18,20 @@ export function useJobListing() {
 export default function JobListingProvider({ children }: { children: ReactNode }) {
     const [listings] = useState<ListingType[]>(data);
     const [renderedListings, setRenderedListings] = useState<ListingType[]>(listings);
+    const [filters, setFilters] = useState<string[]>([]);
+
+    function toggleFilter(filter: string) {
+        setFilters(prevFilters => {
+            if (prevFilters.includes(filter)) {
+                return prevFilters.filter(f => f !== filter);
+            } else {
+                return [...prevFilters, filter];
+            }
+        });
+    }
 
     return (
-        <JobListingContext.Provider value={{ renderedListings }}>
+        <JobListingContext.Provider value={{ renderedListings, filters, toggleFilter }}>
             { children }
         </JobListingContext.Provider>
     );
