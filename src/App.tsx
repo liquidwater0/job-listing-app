@@ -12,7 +12,7 @@ function App() {
 		<>
 			<header className="header">
 				<picture className='sidebar-image'>
-					<source media='(max-width: 900px)' srcSet={mobileHeaderImage}/>
+					<source media='(max-width: 600px)' srcSet={mobileHeaderImage}/>
 					<source media='(min-width: 1024px)' srcSet={desktopHeaderImage}/>
 					<img src={desktopHeaderImage} alt="header image" />
 				</picture>
@@ -20,12 +20,14 @@ function App() {
 
 			<main className="main">
 				<div className="container filters-container">
-					{filters.map(filter =>
-						<Filter
-							key={filter}
-							filter={filter}
-						/>	
-					)}
+					<div className="filters">
+						{filters.map(filter =>
+							<Filter
+								key={filter}
+								filter={filter}
+							/>	
+						)}
+					</div>
 
 					<button 
 						className="clear-filters-button"
