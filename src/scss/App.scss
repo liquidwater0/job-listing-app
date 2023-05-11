@@ -41,7 +41,6 @@ button {
 .main {
     background-color: var(--color-neutral-1);
     padding-inline: 2rem;
-    padding-bottom: 2rem;
 }
 
 .container {
@@ -212,14 +211,21 @@ button {
     }
 }
 
-// .attribution { 
-//     font-size: 11px; 
-//     text-align: center; 
+.attribution { 
+    font-size: 1.25rem; 
+    text-align: center; 
+    padding: 2rem 0;
 
-//     a {
-//         color: hsl(228, 45%, 44%);
-//     }
-// }
+    a {
+        color: var(--color-primary-1);
+        text-decoration: none;
+        font-weight: 700;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
 
 @media (max-width: 900px) {
     .listings-container {
