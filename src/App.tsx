@@ -19,23 +19,26 @@ function App() {
 			</header>
 
 			<main className="main">
-				<div className="container filters-container">
-					<div className="filters">
-						{filters.map(filter =>
-							<Filter
-								key={filter}
-								filter={filter}
-							/>	
-						)}
-					</div>
+				{
+					filters.length > 0 &&
+					<div className="container filters-container">
+						<div className="filters">
+							{filters.map(filter =>
+								<Filter
+									key={filter}
+									filter={filter}
+								/>	
+							)}
+						</div>
 
-					<button 
-						className="clear-filters-button"
-						onClick={clearFilters}
-					>
-						Clear
-					</button>
-				</div>
+						<button 
+							className="clear-filters-button"
+							onClick={clearFilters}
+						>
+							Clear
+						</button>
+					</div>
+				}
 
 				<div className="container listings-container">
 					{renderedListings.map(listing =>
