@@ -1,21 +1,30 @@
 import "./scss/App.scss";
 import { useJobListing } from "./context/JobListingContext";
 import Listing from "./components/Listing";
+import Filter from "./components/Filter";
 
 function App() {
-	const { renderedListings, filters } = useJobListing();
+	const { renderedListings, filters, clearFilters } = useJobListing();
 
 	return (
 		<main className="main">
-			<div className="filters">
+			<div className="filters-container">
 				{filters.map(filter =>
-					<div key={filter} className="filter">
-						{ filter }
-					</div>	
+					<Filter
+						key={filter}
+						filter={filter}
+					/>	
 				)}
+
+				<button 
+					className="clear-filters-button"
+					onClick={clearFilters}
+				>
+					Clear
+				</button>
 			</div>
 
-			<div className="listings">
+			<div className="listings-container">
 				{renderedListings.map(listing =>
 					<Listing
 						key={listing.id}

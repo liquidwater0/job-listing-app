@@ -6,7 +6,7 @@ export default function Listing({ listing }: { listing: ListingType }) {
         company, 
         logo, 
         new: isNew, 
-        featured, 
+        featured: isFeatured, 
         position, 
         postedAt, 
         contract, 
@@ -17,7 +17,7 @@ export default function Listing({ listing }: { listing: ListingType }) {
     const { toggleFilter } = useJobListing();
 
     return (
-        <div className={`listing ${featured ? "listing-featured" : ""}`}>
+        <div className={`listing ${isFeatured ? "listing-featured" : ""}`}>
             <div className="company-logo">
                 <img 
                     src={logo} 
@@ -28,10 +28,10 @@ export default function Listing({ listing }: { listing: ListingType }) {
                 <div className="details-section">
                     <span className="company-name">{ company }</span>
                     { isNew && <span className="badge new-badge">New!</span> }
-                    { featured && <span className="badge featured-badge">Featured</span> }
+                    { isFeatured && <span className="badge featured-badge">Featured</span> }
                 </div>
 
-                <h2 className="position-text">{ position }</h2>
+                <h1 className="position-text">{ position }</h1>
 
                 <div className="details-section">
                     <span>{ postedAt }</span>

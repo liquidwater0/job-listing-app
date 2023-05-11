@@ -7,6 +7,7 @@ type JobListingContextType = {
     renderedListings: ListingType[],
     filters: string[],
     toggleFilter: (filter: string) => void,
+    clearFilters: () => void
 }
 
 const JobListingContext = createContext<JobListingContextType>(null!);
@@ -30,8 +31,12 @@ export default function JobListingProvider({ children }: { children: ReactNode }
         });
     }
 
+    function clearFilters() {
+        setFilters([]);
+    }
+
     return (
-        <JobListingContext.Provider value={{ renderedListings, filters, toggleFilter }}>
+        <JobListingContext.Provider value={{ renderedListings, filters, toggleFilter, clearFilters }}>
             { children }
         </JobListingContext.Provider>
     );
