@@ -31,7 +31,9 @@ export default function Listing({ listing }: { listing: ListingType }) {
                     { isFeatured && <span className="badge featured-badge">Featured</span> }
                 </div>
 
-                <h1 className="position-text">{ position }</h1>
+                <h1 className="position-text" aria-label={position}>
+                    <a href="#">{ position }</a>
+                </h1>
 
                 <div className="details-section">
                     <span>{ postedAt }</span>
@@ -41,13 +43,13 @@ export default function Listing({ listing }: { listing: ListingType }) {
             </div>
             <div className="listing-tags">
                 {[...languages, ...tools].map(tag => 
-                    <div 
+                    <button 
                         key={tag} 
                         className="tag"
                         onClick={() => toggleFilter(tag)}
                     >
                         { tag }
-                    </div>    
+                    </button>    
                 )}
             </div>
         </div>

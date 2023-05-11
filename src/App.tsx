@@ -19,7 +19,7 @@ function App() {
 			</header>
 
 			<main className="main">
-				<div className="filters-container">
+				<div className="container filters-container">
 					{filters.map(filter =>
 						<Filter
 							key={filter}
@@ -35,7 +35,7 @@ function App() {
 					</button>
 				</div>
 
-				<div className="listings-container">
+				<div className="container listings-container">
 					{renderedListings.map(listing =>
 						<Listing
 							key={listing.id}
