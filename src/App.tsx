@@ -11,7 +11,7 @@ function App() {
 	return (
 		<>
 			<header className="header">
-				<picture className='sidebar-image'>
+				<picture>
 					<source media='(max-width: 600px)' srcSet={mobileHeaderImage}/>
 					<source media='(min-width: 1024px)' srcSet={desktopHeaderImage}/>
 					<img src={desktopHeaderImage} alt="header image" />
