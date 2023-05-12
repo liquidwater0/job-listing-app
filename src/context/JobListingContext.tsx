@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext, createContext, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { useState, useEffect, useContext, createContext } from "react";
 import data from "../../data.json";
 
 export type ListingType = typeof data[0];
@@ -21,12 +22,27 @@ export default function JobListingProvider({ children }: { children: ReactNode }
     const [renderedListings, setRenderedListings] = useState<ListingType[]>(listings);
     const [filters, setFilters] = useState<string[]>([]);
 
-    useEffect(() => {
-        //check if listing has a matching filter and if so then display it otherwise filter it out.
-        setRenderedListings(() => {
-            return listings;
-        });
-    }, [filters]);
+    // useEffect(() => {
+    //     //check if listing has a matching filter and if so then display it otherwise filter it out.
+    //     setRenderedListings(() => {
+    //         const filteredListings: ListingType[] = [];
+
+    //         listings.forEach(listing => {
+    //             const listingFilters = [...listing.languages, ...listing.tools];
+
+    //             listingFilters.forEach(listingFilter => {
+    //                 if (
+    //                     filters.includes(listingFilter) || 
+    //                     filters.some(f => f !== listingFilter) ||
+    //                     filters.length === 0 && 
+    //                     filteredListings.find(l => l.id === listing.id) === undefined
+    //                 ) filteredListings.push(listing);
+    //             });
+    //         });
+
+    //         return filteredListings;
+    //     });
+    // }, [filters]);
 
     function toggleFilter(filter: string) {
         setFilters(prevFilters => {
