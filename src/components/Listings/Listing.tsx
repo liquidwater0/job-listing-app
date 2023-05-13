@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import type { ListingType } from "../../context/JobListingContext";
 import { useJobListing } from "../../context/JobListingContext";
 
@@ -14,12 +15,20 @@ export default function Listing({ listing }: { listing: ListingType }) {
         filters
     } = listing;
     const { toggleFilter } = useJobListing();
+    const [path, setPath] = useState<string>("");
+
+    useEffect(() => {
+        const path = `../../assets/${logo}`;
+
+        import(path /* @vite-ignore */)
+          .then(module => setPath(module.default));
+      }, []);
 
     return (
         <div className={`listing ${isFeatured ? "listing-featured" : ""}`}>
             <div className="company-logo">
                 <img 
-                    src={logo} 
+                    src={path} 
                     alt={`${company} logo`} 
                 />
             </div>
