@@ -1,5 +1,5 @@
-import type { ListingType } from "../context/JobListingContext";
-import { useJobListing } from "../context/JobListingContext";
+import type { ListingType } from "../../context/JobListingContext";
+import { useJobListing } from "../../context/JobListingContext";
 
 export default function Listing({ listing }: { listing: ListingType }) {
     const { 

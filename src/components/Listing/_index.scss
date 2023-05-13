@@ -1,0 +1,103 @@
+.listing {
+    --dot-size: 0.3rem;
+
+    display: flex;
+    align-items: center;
+    background-color: white;
+    box-shadow: var(--app-shadow);
+    padding: var(--app-padding) calc(var(--app-padding) * 2.5);
+    border-radius: var(--app-border-radius);
+
+    &.listing-featured {
+        border-left: 5px solid var(--color-primary-1);
+    }
+
+    .badge {
+        background-color: green;
+        padding: 0.35em 0.5em;
+        border-radius: 1000px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--color-neutral-1);
+
+        &.new-badge {
+            background-color: var(--color-primary-1);
+        }
+
+        &.featured-badge {
+            background-color: var(--color-neutral-4);
+        }
+    }
+
+    .company-logo {
+        margin-right: 1.5rem;
+    }
+
+    .listing-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-right: auto;
+
+        .company-name {
+            font-size: 1.35rem;
+            color: var(--color-primary-1);
+            font-weight: 700;
+        }
+
+        .details-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .details-section:last-child {
+            position: relative;
+            color: var(--color-neutral-3);
+
+            span:not(:last-child)::after {
+                content: "";
+                position: absolute;
+                width: var(--dot-size);
+                height: var(--dot-size);
+                top: 50%;
+                border-radius: 100%;
+                transform: translate(100%, -50%);
+                background-color: currentColor;
+            }
+        }
+
+        .position-text a {
+            color: initial;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 250ms;
+
+            &:hover {
+                color: var(--color-primary-1);
+            }
+        }
+    }
+
+    .listing-tags {
+        display: flex;
+        gap: 1rem;
+        
+        .tag {
+            background-color: var(--color-neutral-2);
+            color: var(--color-primary-1);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.5em;
+            border-radius: 0.35em;
+            transition: 
+                background-color 250ms,
+                color 250ms;
+
+            &:hover {
+                background-color: var(--color-primary-1);
+                color: var(--color-neutral-1);
+            }
+        }
+    }
+}
