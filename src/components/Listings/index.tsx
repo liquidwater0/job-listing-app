@@ -1,5 +1,6 @@
 import { useJobListing } from "../../context/JobListingContext";
 import Listing from "./Listing";
+import "./logos";
 
 export default function Listings() {
     const { renderedListings } = useJobListing();
