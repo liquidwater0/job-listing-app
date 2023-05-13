@@ -1,13 +1,11 @@
-import { useState } from "react";
 import type { ListingType } from "../../context/JobListingContext";
 import { useJobListing } from "../../context/JobListingContext";
 
 type ListingProps = {
-    listing: ListingType,
-    logos: string[]
+    listing: ListingType
 }
 
-export default function Listing({ listing, logos }: ListingProps) {
+export default function Listing({ listing }: ListingProps) {
     const { 
         company, 
         logo, 
@@ -20,18 +18,13 @@ export default function Listing({ listing, logos }: ListingProps) {
         filters
     } = listing;
     const { toggleFilter } = useJobListing();
-    const [logoPath] = useState<string>(() => {
-        const path = logos.find(l => l.includes(logo));
-        if (!path) return "";
-        return path;
-    });
 
     return (
         <div className={`listing ${isFeatured ? "listing-featured" : ""}`}>
             <div className="company-logo">
                 <img 
-                    src={logoPath} 
-                    alt={`${company} logo`} 
+                    src={`${import.meta.env.BASE_URL}assets/${logo}`}
+                    alt={`${company} logo`}
                 />
             </div>
             <div className="listing-details">
