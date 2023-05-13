@@ -1,12 +1,12 @@
 import "./scss/App.scss";
 import { useJobListing } from "./context/JobListingContext";
-import Listing from "./components/Listing";
-import Filter from "./components/Filter";
+import Listings from "./components/Listings";
+import Filters from "./components/Filters";
 import mobileHeaderImage from "./assets/bg-header-mobile.svg";
 import desktopHeaderImage from "./assets/bg-header-desktop.svg";
 
 function App() {
-	const { renderedListings, filters, clearFilters } = useJobListing();
+	const { filters } = useJobListing();
 
 	return (
 		<>
@@ -19,35 +19,8 @@ function App() {
 			</header>
 
 			<main className="main">
-				{
-					filters.length > 0 &&
-					<div className="container filters-container">
-						<div className="filters">
-							{filters.map(filter =>
-								<Filter
-									key={filter}
-									filter={filter}
-								/>	
-							)}
-						</div>
-
-						<button 
-							className="clear-filters-button"
-							onClick={clearFilters}
-						>
-							Clear
-						</button>
-					</div>
-				}
-
-				<div className="container listings-container">
-					{renderedListings.map(listing =>
-						<Listing
-							key={listing.id}
-							listing={listing}
-						/>
-					)}
-				</div>
+				{ filters.length > 0 && <Filters/> }
+				<Listings/>
 
 				<div className="attribution">
 					Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 

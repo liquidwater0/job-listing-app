@@ -1,5 +1,5 @@
-import { useJobListing } from "../context/JobListingContext";
-import removeIcon from "../assets/icon-remove.svg";
+import { useJobListing } from "../../context/JobListingContext";
+import removeIcon from "../../assets/icon-remove.svg";
 
 export default function Filter({ filter }: { filter: string }) {
     const { toggleFilter } = useJobListing();

@@ -1,0 +1,51 @@
+.filters-container {
+    display: flex;
+    background-color: white;
+    box-shadow: var(--app-shadow);
+    padding: var(--app-padding) calc(var(--app-padding) * 2.5);
+    border-radius: var(--app-border-radius);
+    transform: translateY(-50%);
+
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .filter-container {
+        display: flex;
+        background-color: var(--color-neutral-1);
+        color: var(--color-primary-1);
+        font-weight: 700;
+        border-radius: var(--app-border-radius);
+        overflow: hidden;
+
+        .filter-text {
+            padding: 0.35em;
+        }
+
+        .remove-filter-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--color-primary-1);
+            width: 1.5rem;
+            transition: background-color 250ms;
+
+            &:hover {
+                background-color: var(--color-neutral-4);
+            }
+        }
+    }
+
+    .clear-filters-button {
+        background-color: transparent;
+        font-size: 1rem;
+        color: var(--color-primary-1);
+        margin-left: auto;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
