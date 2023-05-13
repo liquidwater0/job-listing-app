@@ -19,11 +19,16 @@ export default function Listing({ listing }: ListingProps) {
     } = listing;
     const { toggleFilter } = useJobListing();
 
+    function getLogoPath() {
+        if (import.meta.env.PROD) return `${import.meta.env.BASE_URL}assets/${logo}`;
+        if (import.meta.env.DEV) return `../../../src/assets/${logo}`;
+    }
+
     return (
         <div className={`listing ${isFeatured ? "listing-featured" : ""}`}>
             <div className="company-logo">
                 <img 
-                    src={`${import.meta.env.BASE_URL}assets/${logo}`}
+                    src={getLogoPath()}
                     alt={`${company} logo`}
                 />
             </div>
