@@ -3,6 +3,7 @@ import { useState, useEffect, useContext, createContext } from "react";
 import data from "../../data.json";
 
 type Data = typeof data[0];
+
 export interface ListingType extends Data {
     filters: string[]
 }
@@ -26,10 +27,10 @@ export default function JobListingProvider({ children }: { children: ReactNode }
             return { 
                 ...listing, 
                 filters: [
+                    listing.role,
+                    listing.level,
                     ...listing.languages,
                     ...listing.tools,
-                    listing.level,
-                    listing.role
                 ]
             }
         });
@@ -38,33 +39,22 @@ export default function JobListingProvider({ children }: { children: ReactNode }
     const [filters, setFilters] = useState<string[]>([]);
 
     useEffect(() => {
-        setRenderedListings(() => {
-            return listings.filter(listing => {
-                for (const listingFilter of listing.filters) {
-                    if (filters.includes(listingFilter) || filters.length === 0) {
-                        return true;
-                    }
-                }
-
-                return false;
-            });
-        });
+        const filteredListings = getFilteredListings();
+        setRenderedListings(filteredListings);
     }, [filters]);
 
-    //partially works
-    // useEffect(() => {
-    //     setRenderedListings(() => {
-    //         return listings.filter(listing => {
-    //             for (const listingFilter of listing.filters) {
-    //                 if (filters.includes(listingFilter) || filters.length === 0) {
-    //                     return true;
-    //                 }
-    //             }
+    function getFilteredListings() {
+        return listings.filter(listing => {
+            const listingFiltersThatMatch = listing.filters.filter(filter => {
+                return filters.includes(filter);
+            });
+            const matches = filters.every((filter, index) => {
+                return listingFiltersThatMatch[index] === filter;
+            });
 
-    //             return false;
-    //         });
-    //     });
-    // }, [filters]);
+            return matches;
+        });
+    }
 
     function toggleFilter(filter: string) {
         setFilters(prevFilters => {

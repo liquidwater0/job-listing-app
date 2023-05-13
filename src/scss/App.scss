@@ -23,6 +23,7 @@
 }
 
 body {
+    background-color: var(--color-neutral-1);
     overflow-x: hidden;
 }
 
@@ -42,7 +43,6 @@ button {
 }
 
 .main {
-    background-color: var(--color-neutral-1);
     padding-inline: 2rem;
 }
 
