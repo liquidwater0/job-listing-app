@@ -1,8 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { ListingType } from "../../context/JobListingContext";
 import { useJobListing } from "../../context/JobListingContext";
 
-export default function Listing({ listing }: { listing: ListingType }) {
+type ListingProps = {
+    listing: ListingType,
+    logos: string[]
+}
+
+export default function Listing({ listing, logos }: ListingProps) {
     const { 
         company, 
         logo, 
@@ -15,14 +20,11 @@ export default function Listing({ listing }: { listing: ListingType }) {
         filters
     } = listing;
     const { toggleFilter } = useJobListing();
-    const [logoPath, setLogoPath] = useState<string>("");
-
-    useEffect(() => {
-        const path = `../../assets/${logo}`;
-
-        import(path /* @vite-ignore */)
-          .then(module => setLogoPath(module.default));
-      }, []);
+    const [logoPath] = useState<string>(() => {
+        const path = logos.find(l => l.includes(logo));
+        if (!path) return "";
+        return path;
+    });
 
     return (
         <div className={`listing ${isFeatured ? "listing-featured" : ""}`}>
