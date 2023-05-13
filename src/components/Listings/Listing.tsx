@@ -39,7 +39,7 @@ export default function Listing({ listing }: ListingProps) {
                     { isFeatured && <span className="badge featured-badge">Featured</span> }
                 </div>
 
-                <h1 className="position-text" aria-label={position}>
+                <h1 className="position-text">
                     <a href="#">{ position }</a>
                 </h1>
 
