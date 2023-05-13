@@ -15,20 +15,20 @@ export default function Listing({ listing }: { listing: ListingType }) {
         filters
     } = listing;
     const { toggleFilter } = useJobListing();
-    const [path, setPath] = useState<string>("");
+    const [logoPath, setLogoPath] = useState<string>("");
 
     useEffect(() => {
         const path = `../../assets/${logo}`;
 
         import(path /* @vite-ignore */)
-          .then(module => setPath(module.default));
+          .then(module => setLogoPath(module.default));
       }, []);
 
     return (
         <div className={`listing ${isFeatured ? "listing-featured" : ""}`}>
             <div className="company-logo">
                 <img 
-                    src={path} 
+                    src={logoPath} 
                     alt={`${company} logo`} 
                 />
             </div>
