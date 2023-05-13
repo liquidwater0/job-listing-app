@@ -11,8 +11,7 @@ export default function Listing({ listing }: { listing: ListingType }) {
         postedAt, 
         contract, 
         location,
-        languages,
-        tools
+        filters
     } = listing;
     const { toggleFilter } = useJobListing();
 
@@ -42,7 +41,7 @@ export default function Listing({ listing }: { listing: ListingType }) {
                 </div>
             </div>
             <div className="listing-tags">
-                {[...languages, ...tools].map(tag => 
+                {filters.map(tag => 
                     <button 
                         key={tag} 
                         className="tag"

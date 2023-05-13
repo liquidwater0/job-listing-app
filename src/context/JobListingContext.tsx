@@ -2,7 +2,11 @@ import type { ReactNode } from "react";
 import { useState, useEffect, useContext, createContext } from "react";
 import data from "../../data.json";
 
-export type ListingType = typeof data[0];
+// export type ListingType = typeof data[0] & { filters: string[] };
+type Data = typeof data[0];
+export interface ListingType extends Data {
+    filters: string[]
+}
 
 type JobListingContextType = {
     renderedListings: ListingType[],
@@ -18,29 +22,57 @@ export function useJobListing() {
 }
 
 export default function JobListingProvider({ children }: { children: ReactNode }) {
-    const [listings] = useState<ListingType[]>(data);
+    const [listings] = useState<ListingType[]>(() => {
+        return data.map(listing => {
+            return { 
+                ...listing, 
+                filters: [
+                    ...listing.languages,
+                    ...listing.tools,
+                    listing.level,
+                    listing.role
+                ]
+            }
+        });
+    });
     const [renderedListings, setRenderedListings] = useState<ListingType[]>(listings);
     const [filters, setFilters] = useState<string[]>([]);
 
-    // useEffect(() => {
-    //     //check if listing has a matching filter and if so then display it otherwise filter it out.
-    //     setRenderedListings(() => {
-    //         const filteredListings: ListingType[] = [];
+    useEffect(() => {
+        setRenderedListings(() => {
+            return listings.filter(listing => {
+                const listingFilters = [
+                    ...listing.languages, 
+                    ...listing.tools, 
+                    listing.level, 
+                    listing.role
+                ];
 
-    //         listings.forEach(listing => {
+                for (const listingFilter of listingFilters) {
+                    if (filters.includes(listingFilter) || filters.length === 0) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+        });
+    }, [filters]);
+
+    //partially works
+    // useEffect(() => {
+    //     setRenderedListings(() => {
+    //         return listings.filter(listing => {
     //             const listingFilters = [...listing.languages, ...listing.tools];
 
-    //             listingFilters.forEach(listingFilter => {
-    //                 if (
-    //                     filters.includes(listingFilter) || 
-    //                     filters.some(f => f !== listingFilter) ||
-    //                     filters.length === 0 && 
-    //                     filteredListings.find(l => l.id === listing.id) === undefined
-    //                 ) filteredListings.push(listing);
-    //             });
-    //         });
+    //             for (const listingFilter of listingFilters) {
+    //                 if (filters.some(filter => filter === listingFilter) || filters.length === 0) {
+    //                     return true;
+    //                 }
+    //             }
 
-    //         return filteredListings;
+    //             return false;
+    //         });
     //     });
     // }, [filters]);
 
