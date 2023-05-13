@@ -86,8 +86,17 @@
         }
     }
 
+    .divider {
+        display: none;
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-neutral-3);
+        margin: 1rem 0;
+    }
+
     .listing-tags {
         display: flex;
+        flex-wrap: wrap;
         gap: 1rem;
         
         .tag {
@@ -122,26 +131,16 @@
 
         .company-logo {
             position: absolute;
-            top: calc(-50% + 4.5rem);
+            // top: -50%;
+            transform: translateY(-75%);
         }
 
         .listing-details {
             margin-top: 3rem;
         }
 
-        .listing-tags {
-            position: relative;
-            margin-top: 2rem;
-
-            &::before {
-                content: "";
-                position: absolute;
-                background-color: var(--color-neutral-3);
-                width: 100%;
-                height: 2px;
-                top: -50%;
-                border-radius: 1000px;
-            }
+        .divider {
+            display: block;
         }
     }
 }

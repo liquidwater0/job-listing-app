@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { useState, useEffect, useContext, createContext } from "react";
 import data from "../../data.json";
 
-// export type ListingType = typeof data[0] & { filters: string[] };
 type Data = typeof data[0];
 export interface ListingType extends Data {
     filters: string[]
@@ -41,14 +40,7 @@ export default function JobListingProvider({ children }: { children: ReactNode }
     useEffect(() => {
         setRenderedListings(() => {
             return listings.filter(listing => {
-                const listingFilters = [
-                    ...listing.languages, 
-                    ...listing.tools, 
-                    listing.level, 
-                    listing.role
-                ];
-
-                for (const listingFilter of listingFilters) {
+                for (const listingFilter of listing.filters) {
                     if (filters.includes(listingFilter) || filters.length === 0) {
                         return true;
                     }
@@ -63,10 +55,8 @@ export default function JobListingProvider({ children }: { children: ReactNode }
     // useEffect(() => {
     //     setRenderedListings(() => {
     //         return listings.filter(listing => {
-    //             const listingFilters = [...listing.languages, ...listing.tools];
-
-    //             for (const listingFilter of listingFilters) {
-    //                 if (filters.some(filter => filter === listingFilter) || filters.length === 0) {
+    //             for (const listingFilter of listing.filters) {
+    //                 if (filters.includes(listingFilter) || filters.length === 0) {
     //                     return true;
     //                 }
     //             }

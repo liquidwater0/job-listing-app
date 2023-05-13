@@ -40,6 +40,9 @@ export default function Listing({ listing }: { listing: ListingType }) {
                     <span>{ location }</span>
                 </div>
             </div>
+            
+            <div className="divider"/>
+
             <div className="listing-tags">
                 {filters.map(tag => 
                     <button 
